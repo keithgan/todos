@@ -44,17 +44,6 @@ class TodosController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Todo  $todo
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Todo $todo)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Todo  $todo
