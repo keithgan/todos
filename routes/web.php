@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TodosController@index')->name('root');
+
+Route::get('todos', 'TodosController@index')->name('todos.index');
