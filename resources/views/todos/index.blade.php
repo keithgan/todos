@@ -17,4 +17,9 @@
       </div>
     </div>
   </div>
+
+  <a href="{{ route('todos.create') }}" class="btn btn-primary mb-3 ml-auto">Create new todos</a>
+  <ul class="todos-wrapper">
+  // Other Code
+  </ul>
 @endsection
