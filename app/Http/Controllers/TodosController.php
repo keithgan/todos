@@ -12,9 +12,10 @@ class TodosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(){
+        $todos = Todo::all();
+
+        return view('todos.index', ['todos' => $todos]);
     }
 
     /**
