@@ -88,8 +88,9 @@ class TodosController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todo $todo)
-    {
-        //
+    public function destroy(Todo $todo){
+      $todo->delete();
+		
+      return redirect()->route('todos.index');    
     }
 }
