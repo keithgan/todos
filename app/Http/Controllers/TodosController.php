@@ -23,9 +23,8 @@ class TodosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(){
+        return view('todos.create');
     }
 
     /**
@@ -34,9 +33,14 @@ class TodosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:15',
+            ]);
+            
+        Todo::create($validatedData);
+
+        return redirect()->route('todos.index');
     }
 
     /**
