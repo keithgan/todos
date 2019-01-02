@@ -71,9 +71,15 @@ class TodosController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todo $todo)
-    {
-        //
+    public function update(Request $request, Todo $todo){
+      $data = $request->validate([
+        'title' => 'required|string|max:15',
+      ]);
+      
+      $todo->title = $data['title'];
+      $todo->save();
+      
+      return redirect()->route('todos.index');
     }
 
     /**
