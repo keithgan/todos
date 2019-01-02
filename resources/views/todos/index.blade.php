@@ -9,7 +9,9 @@
           <div class="todos-wrapper">
             <ul class="list-group todos-list">
               @foreach ($todos as $todo)
-                <li class="list-group-item todos-list-item">{{ $todo->title }}</li>
+              <li class="list-group-item todos-list-item">
+                <a href="{{ route('todos.edit', $todo->id) }}" class="todos-list-item-link">{{ $todo->title }}</a>
+              </li>
               @endforeach
             </ul>
           </div>
