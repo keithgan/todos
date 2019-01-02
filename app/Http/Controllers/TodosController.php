@@ -60,9 +60,8 @@ class TodosController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Todo $todo)
-    {
-        //
+    public function edit(Todo $todo){
+        return view('todos.edit', ['todo' => $todo]);
     }
 
     /**
