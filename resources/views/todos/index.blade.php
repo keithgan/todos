@@ -6,6 +6,8 @@
       <div class="row">
         <div class="col-md-6 mx-auto">
           <h1 class="todos-title">Todos</h1>
+          <!-- place your component under the todos-title in your index.blade.php-->
+          <todos-component></todos-component>
           <div class="todos-wrapper">
             <ul class="list-group todos-list">
               @foreach ($todos as $todo)
