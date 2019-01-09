@@ -3,19 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Todo;
+Use App\Services\TodosService;
 use Illuminate\Http\Request;
 
-class TodosController extends Controller
-{
+class TodosController extends Controller{
+
+    private $todoService;
+
+    public function __construct(TodosService $todoService){
+      $this->todosService = $todoService;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $todos = Todo::all();
-
-        return view('todos.index', ['todos' => $todos]);
+    public function index(Request $request){
+        if ($request->wantsJson()){
+          // return a JSON response
+          return $this->todosService->all();
+        }
+        // otherwise we will return the view 
+        return view('todos.index');
     }
 
     /**

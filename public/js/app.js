@@ -47822,10 +47822,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log("Hello World");
+    this.getTodos();
+  },
+
+
+  methods: {
+    getTodos: function getTodos() {
+      var _this = this;
+
+      axios.get('/todos').then(function (_ref) {
+        var data = _ref.data;
+
+        _this.todos = data;
+      }, function (error) {
+        console.log(error);
+      });
+    }
   }
 });
 
@@ -47837,7 +47870,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6 mx-auto" }, [
+            _c("h1", { staticClass: "todos-title" }, [_vm._v("Todos")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "todos-wrapper" }, [
+              _c(
+                "ul",
+                { staticClass: "list-group todos-list" },
+                _vm._l(_vm.todos, function(todo) {
+                  return _c(
+                    "li",
+                    { staticClass: "list-group-item todos-list-item" },
+                    [
+                      _c("a", { staticClass: "todos-list-item-link" }, [
+                        _vm._v(_vm._s(todo.title))
+                      ])
+                    ]
+                  )
+                }),
+                0
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("br")
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
