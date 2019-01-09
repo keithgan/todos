@@ -22,6 +22,13 @@
 
 <script>
   export default {
+    data: function(){
+      return {
+        todos: [
+          
+        ]
+      };
+    },
     mounted() {
       this.getTodos();
     },
