@@ -1,7 +1,9 @@
 @extends('layouts.master')
 
 @section('master')
-  <div class="row">
+  <todos-edit-component todo={{ $todo }}></todos-edit-component>
+
+  {{-- <div class="row">
     <div class="container">
       <div class="row">
         <div class="col-md-7 mx-auto" style="text-align:center">
@@ -17,5 +19,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 @endsection

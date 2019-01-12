@@ -16,3 +16,21 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// List todos
+Route::get('todos', 'TodosController@index')-> name('todos.index');
+
+// Show create page
+Route::get('create', 'TodosController@create');
+
+// Create new todos
+Route::post('todos', 'TodosController@store');
+
+// Edit todos
+Route::get('todos/{todo}/edit', 'TodosController@edit');
+
+// Update todos
+Route::put('todos/{todo}', 'TodosController@update');
+
+// Delete todos
+Route::delete('todos/{todo}', 'TodosController@destroy');

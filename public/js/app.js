@@ -47840,13 +47840,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      todos: []
+      todos: [],
+      todo: {
+        title: ''
+      },
+      edit: false
     };
   },
+
   mounted: function mounted() {
     this.getTodos();
   },
@@ -47856,13 +47868,84 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getTodos: function getTodos() {
       var _this = this;
 
-      axios.get('/todos').then(function (_ref) {
+      axios({
+        method: 'get',
+        url: 'api/todos',
+        headers: {
+          'content-type': 'application/json'
+        }
+      }).then(function (_ref) {
         var data = _ref.data;
 
         _this.todos = data;
       }, function (error) {
         console.log(error);
       });
+    },
+    addTodo: function addTodo() {
+      var _this2 = this;
+
+      if (this.edit == false) {
+        // add
+        axios({
+          method: 'post',
+          url: 'api/todos',
+          data: {
+            title: this.todo.title
+          },
+          headers: {
+            'content-type': 'application/json'
+          }
+        }).then(function (data) {
+          _this2.todo.title = '';
+          _this2.getTodos();
+        }, function (error) {
+          console.log(error);
+        });
+      } else {
+        // Update
+        console.log('editing');
+        axios({
+          method: 'put',
+          url: 'api/todos/' + this.todo.id,
+          data: {
+            title: this.todo.title
+          },
+          headers: {
+            'content-type': 'application/json'
+          }
+        }).then(function (data) {
+          _this2.todo.title = '';
+          _this2.getTodos();
+        }, function (error) {
+          console.log(error);
+        });
+      }
+    },
+    deleteTodo: function deleteTodo(id) {
+      var _this3 = this;
+
+      // console.log(id);
+      axios({
+        method: 'delete',
+        url: 'api/todos/' + id
+        // headers:{
+        //   'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+        // }
+      }).then(function (data) {
+        consolex.log('deleted');
+        _this3.getTodos();
+
+        // this.getTodos();
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    editTodo: function editTodo(todo) {
+      console.log(todo);
+      this.edit = true;
+      this.todo.id = todo.id;
+      this.todo.title = todo.title;
     }
   }
 });
@@ -47882,6 +47965,53 @@ var render = function() {
           _c("div", { staticClass: "col-md-6 mx-auto" }, [
             _c("h1", { staticClass: "todos-title" }, [_vm._v("Todos")]),
             _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "mb-3",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addTodo($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.todo.title,
+                        expression: "todo.title"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Title" },
+                    domProps: { value: _vm.todo.title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.todo, "title", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-block",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Save")]
+                )
+              ]
+            ),
+            _vm._v(" "),
             _c("div", { staticClass: "todos-wrapper" }, [
               _c(
                 "ul",
@@ -47889,11 +48019,37 @@ var render = function() {
                 _vm._l(_vm.todos, function(todo) {
                   return _c(
                     "li",
-                    { staticClass: "list-group-item todos-list-item" },
+                    {
+                      key: todo.id,
+                      staticClass: "list-group-item todos-list-item"
+                    },
                     [
-                      _c("a", { staticClass: "todos-list-item-link" }, [
-                        _vm._v(_vm._s(todo.title))
-                      ])
+                      _c(
+                        "a",
+                        {
+                          staticClass: "todos-list-item-link",
+                          on: {
+                            click: function($event) {
+                              _vm.editTodo(todo)
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(todo.title))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          staticStyle: { float: "right" },
+                          on: {
+                            click: function($event) {
+                              _vm.deleteTodo(todo.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Delete")]
+                      )
                     ]
                   )
                 }),
