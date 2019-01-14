@@ -79,7 +79,6 @@
           });
         } else {
           // Update
-          console.log('editing');
           axios({
             method: 'put',
             url: `api/todos/${this.todo.id}`,
@@ -93,31 +92,24 @@
           .then(data => {
             this.todo.title = '';
             this.getTodos();
+            this.edit = false;
           }, (error) => {
           console.log(error);
           });
         }
       },
       deleteTodo(id) {
-        // console.log(id);
         axios({
           method: 'delete',
-          url: `api/todos/${id}`,
-          // headers:{
-          //   'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-          // }
+          url: `api/todos/${id}`
         })
         .then(data => {
-          consolex.log('deleted');
           this.getTodos();
-
-          // this.getTodos();
         }, (error) => {
           console.log(error);
         });
       },
       editTodo(todo) {
-        console.log(todo)
         this.edit = true;
         this.todo.id = todo.id;
         this.todo.title = todo.title;

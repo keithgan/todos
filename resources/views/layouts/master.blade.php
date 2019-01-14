@@ -13,8 +13,10 @@
   </head>
   <body>
     
+    @include('partials._nav')
+
     <div id="app">
-      <div class="container-fluid">
+      <div class="container-fluid mt-5 mb-2">
         @yield('master')
       </div>
     </div>

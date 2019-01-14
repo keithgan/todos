@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // List todos
-Route::get('todos', 'TodosController@index')-> name('todos.index');
+Route::get('todos', 'TodosController@index');
 
 // Show create page
 Route::get('create', 'TodosController@create');

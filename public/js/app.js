@@ -47904,7 +47904,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       } else {
         // Update
-        console.log('editing');
         axios({
           method: 'put',
           url: 'api/todos/' + this.todo.id,
@@ -47917,6 +47916,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).then(function (data) {
           _this2.todo.title = '';
           _this2.getTodos();
+          _this2.edit = false;
         }, function (error) {
           console.log(error);
         });
@@ -47925,24 +47925,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     deleteTodo: function deleteTodo(id) {
       var _this3 = this;
 
-      // console.log(id);
       axios({
         method: 'delete',
         url: 'api/todos/' + id
-        // headers:{
-        //   'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-        // }
       }).then(function (data) {
-        consolex.log('deleted');
         _this3.getTodos();
-
-        // this.getTodos();
       }, function (error) {
         console.log(error);
       });
     },
     editTodo: function editTodo(todo) {
-      console.log(todo);
       this.edit = true;
       this.todo.id = todo.id;
       this.todo.title = todo.title;
