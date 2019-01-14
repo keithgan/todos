@@ -18,8 +18,6 @@ class login
 
         if (Auth::guard($guard)->check() == false) {
             return redirect( route('login'));
-            // return redirect(route('todos.index'));
-            // dd(Auth::guard($guard)->check());
         }
 
         return $next($request);
