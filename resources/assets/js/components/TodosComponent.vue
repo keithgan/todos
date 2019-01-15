@@ -7,7 +7,7 @@
             <h1 class="todos-title">Todos</h1>
               <form @submit.prevent='addTodo' class='mb-3'>
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Title" v-model='todo.title'>
+                  <input type="text" class="form-control" style='text-align:center' placeholder="What needs to be done?" v-model='todo.title'>
                 </div>
                 <button type='submit' class="btn btn-primary btn-block">Save</button>
               </form>
@@ -15,7 +15,7 @@
               <ul class="list-group todos-list">
                 <li class="list-group-item todos-list-item" v-for='todo in todos' v-bind:key='todo.id'>
                   <a @click='editTodo(todo)' class="todos-list-item-link">{{ todo.title }}</a>
-                  <button @click='deleteTodo(todo.id)' class= 'btn btn-danger' style='float: right'>Delete</button>
+                  <button @click='deleteTodo(todo.id)'  class= 'btn btn-danger' style='float: right'>Delete</button>
                 </li>
               </ul>
             </div>
