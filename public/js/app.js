@@ -47980,7 +47980,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Title" },
+                    staticStyle: { "text-align": "center" },
+                    attrs: {
+                      type: "text",
+                      placeholder: "What needs to be done?"
+                    },
                     domProps: { value: _vm.todo.title },
                     on: {
                       input: function($event) {
