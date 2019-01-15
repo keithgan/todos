@@ -45,20 +45,26 @@
 
     methods: {
       getTodos: function(){
-        axios({
-          method: 'get',
-          url:'api/todos',
-          headers: {
-            'content-type': 'application/json'
-          }
-        })
-        .then(({ data }) => {
-          this.todos = data;
+      //   axios({
+      //     method: 'get',
+      //     url:'api/todos',
+      //     headers: {
+      //       'content-type': 'application/json'
+      //     }
+      //   })
+      //   .then(({ data }) => {
+      //     this.todos = data;
+      //   }, (error) => {
+      //     console.log(error);
+      //   });			
+      // },
+        axios.get('api/todos').then((res) => {
+        this.todos = res.data;
         }, (error) => {
           console.log(error);
-        });			
+        });
       },
-      addTodo() {
+      addTodo: function() {
         if(this.edit == false) {
           // add
           axios({
