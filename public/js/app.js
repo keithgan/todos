@@ -47868,16 +47868,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getTodos: function getTodos() {
       var _this = this;
 
-      axios({
-        method: 'get',
-        url: 'api/todos',
-        headers: {
-          'content-type': 'application/json'
-        }
-      }).then(function (_ref) {
-        var data = _ref.data;
-
-        _this.todos = data;
+      //   axios({
+      //     method: 'get',
+      //     url:'api/todos',
+      //     headers: {
+      //       'content-type': 'application/json'
+      //     }
+      //   })
+      //   .then(({ data }) => {
+      //     this.todos = data;
+      //   }, (error) => {
+      //     console.log(error);
+      //   });			
+      // },
+      axios.get('api/todos').then(function (res) {
+        _this.todos = res.data;
       }, function (error) {
         console.log(error);
       });
