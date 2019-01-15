@@ -32,7 +32,7 @@ Route::get('auth/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('auth/register', 'Auth\RegisterController@register');
 
-Route::middleware('login')->group(function(){
+Route::middleware('auth')->group(function(){
   Route::get('/', function(){
     return view('todos.index');
   })->name('todos.index');
